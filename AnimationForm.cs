@@ -1,46 +1,56 @@
-using BatteryVisualizer.Models;
+п»їusing System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BatteryVisualizer
 {
-    public partial class Form1 : Form
+    public partial class AnimationForm : Form
     {
-        public Form1()
+        private SettingsForm _parentForm;
+        public AnimationForm(SettingsForm parentForm)
         {
             InitializeComponent();
             panelAnimation.Paint += PanelAnimation_Paint;
+            _parentForm = parentForm;
         }
         private void PanelAnimation_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            // Координаты батареи
+            // РљРѕРѕСЂРґРёРЅР°С‚С‹ Р±Р°С‚Р°СЂРµРё
             int x0 = 50, y0 = 50;
             int width = 200, height = 100;
             int electrodeThickness = 10;
 
-            // Тело батареи
+            // РўРµР»Рѕ Р±Р°С‚Р°СЂРµРё
             var bodyRect = new Rectangle(x0, y0, width, height);
             using (var pen = new Pen(Color.Black, 2))
                 g.DrawRectangle(pen, bodyRect);
 
-            // Анод (левая пластина)
+            // РђРЅРѕРґ (Р»РµРІР°СЏ РїР»Р°СЃС‚РёРЅР°)
             var anode = new Rectangle(x0 + electrodeThickness, y0 + 10,
                                       electrodeThickness, height - 20);
             using (var brush = new SolidBrush(Color.Gray))
                 g.FillRectangle(brush, anode);
 
-            // Катод (правая пластина)
+            // РљР°С‚РѕРґ (РїСЂР°РІР°СЏ РїР»Р°СЃС‚РёРЅР°)
             var cathode = new Rectangle(x0 + width - 2 * electrodeThickness, y0 + 10,
                                         electrodeThickness, height - 20);
             using (var brush = new SolidBrush(Color.Gray))
                 g.FillRectangle(brush, cathode);
 
-            // Сепаратор
+            // РЎРµРїР°СЂР°С‚РѕСЂ
             int sepX = x0 + electrodeThickness * 2 + 10;
             g.DrawLine(Pens.LightGray, sepX, y0 + 10, sepX, y0 + height - 10);
 
-            // Индикатор заряда (пример: 60%)
+            // РРЅРґРёРєР°С‚РѕСЂ Р·Р°СЂСЏРґР° (РїСЂРёРјРµСЂ: 60%)
             float chargePercent = 0.6f;
             int chargeWidth = (int)((width - electrodeThickness * 4) * chargePercent);
             var chargeRect = new Rectangle(x0 + electrodeThickness * 2 + 12,
@@ -48,14 +58,20 @@ namespace BatteryVisualizer
             using (var brush = new SolidBrush(Color.LightGreen))
                 g.FillRectangle(brush, chargeRect);
 
-            // Подписи
+            // РџРѕРґРїРёСЃРё
             using (var font = new Font("Segoe UI", 9))
             using (var brush = new SolidBrush(Color.Black))
             {
-                g.DrawString("Анод", font, brush, x0 + electrodeThickness + 2, y0 - 18);
-                g.DrawString("Катод", font, brush, x0 + width - 2 * electrodeThickness - 2, y0 - 18);
-                g.DrawString($"Заряд: {(int)(chargePercent * 100)}%", font, brush, x0, y0 + height + 5);
+                g.DrawString("РђРЅРѕРґ", font, brush, x0 + electrodeThickness + 2, y0 - 18);
+                g.DrawString("РљР°С‚РѕРґ", font, brush, x0 + width - 2 * electrodeThickness - 2, y0 - 18);
+                g.DrawString($"Р—Р°СЂСЏРґ: {(int)(chargePercent * 100)}%", font, brush, x0, y0 + height + 5);
             }
+        }
+
+        private void buttonReturnToMenu_Click(object sender, EventArgs e)
+        {
+            _parentForm.Show();
+            this.Close();
         }
     }
 }
