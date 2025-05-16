@@ -129,16 +129,16 @@
   <data name="&gt;&gt;domainUpDownCurrent.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.Name" xml:space="preserve">
-    <value>labelCurrent</value>
+  <data name="&gt;&gt;labelResistance.Name" xml:space="preserve">
+    <value>labelResistance</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelResistance.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelResistance.Parent" xml:space="preserve">
     <value>groupBoxBattery</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelResistance.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;domainUpDownCapacity.Name" xml:space="preserve">
@@ -213,7 +213,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxBattery.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="domainUpDownCurrent.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 172</value>
@@ -239,35 +239,35 @@
   <data name="&gt;&gt;domainUpDownCurrent.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelCurrent.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelResistance.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="labelCurrent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelCurrent.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelResistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 149</value>
   </data>
-  <data name="labelCurrent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 20</value>
+  <data name="labelResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 20</value>
   </data>
-  <data name="labelCurrent.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelResistance.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="labelCurrent.Text" xml:space="preserve">
-    <value>Сила тока (мА)</value>
+  <data name="labelResistance.Text" xml:space="preserve">
+    <value>Сопротивление (мОм)</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.Name" xml:space="preserve">
-    <value>labelCurrent</value>
+  <data name="&gt;&gt;labelResistance.Name" xml:space="preserve">
+    <value>labelResistance</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelResistance.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelResistance.Parent" xml:space="preserve">
     <value>groupBoxBattery</value>
   </data>
-  <data name="&gt;&gt;labelCurrent.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelResistance.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="domainUpDownCapacity.Location" type="System.Drawing.Point, System.Drawing">
@@ -407,10 +407,220 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelAnimation.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Name" xml:space="preserve">
+    <value>buttonReset</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Parent" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.Name" xml:space="preserve">
+    <value>buttonDischarge</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.Parent" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.Name" xml:space="preserve">
+    <value>buttonCharge</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.Parent" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupBoxPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 227</value>
+  </data>
+  <data name="groupBoxPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 111</value>
+  </data>
+  <data name="groupBoxPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="groupBoxPanel.Text" xml:space="preserve">
+    <value>Управление анимацией</value>
+  </data>
+  <data name="&gt;&gt;groupBoxPanel.Name" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;groupBoxPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="buttonCharge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="buttonCharge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 30</value>
+  </data>
+  <data name="buttonCharge.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonCharge.Text" xml:space="preserve">
+    <value>Зарядить</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.Name" xml:space="preserve">
+    <value>buttonCharge</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.Parent" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonCharge.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonDischarge.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonDischarge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 35</value>
+  </data>
+  <data name="buttonDischarge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 30</value>
+  </data>
+  <data name="buttonDischarge.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="buttonDischarge.Text" xml:space="preserve">
+    <value>Разрядить</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.Name" xml:space="preserve">
+    <value>buttonDischarge</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.Parent" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonDischarge.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonReset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 71</value>
+  </data>
+  <data name="buttonReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 30</value>
+  </data>
+  <data name="buttonReset.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonReset.Text" xml:space="preserve">
+    <value>Сброс</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Name" xml:space="preserve">
+    <value>buttonReset</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Parent" xml:space="preserve">
+    <value>groupBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>groupBoxStatus</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBoxStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 344</value>
+  </data>
+  <data name="groupBoxStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 125</value>
+  </data>
+  <data name="groupBoxStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="groupBoxStatus.Text" xml:space="preserve">
+    <value> Статус</value>
+  </data>
+  <data name="&gt;&gt;groupBoxStatus.Name" xml:space="preserve">
+    <value>groupBoxStatus</value>
+  </data>
+  <data name="&gt;&gt;groupBoxStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxStatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxStatus.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 23</value>
+  </data>
+  <data name="label1.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>190, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Уровень заряда: n%</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>groupBoxStatus</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>45</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>8, 20</value>
@@ -420,6 +630,12 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Эмулятор аккумулятора</value>
+  </data>
+  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
+    <value>timer1</value>
+  </data>
+  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>
