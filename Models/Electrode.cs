@@ -47,8 +47,10 @@ namespace BatteryVisualizer.Models
                 float textY = Y + Height + 10;
                 g.DrawString(Name, font, textBrush, textX, textY);
             }
+        }
 
-            // Отрисовка частиц
+        public void RenderCarriers(Graphics g)
+        {
             foreach (var carrier in Carriers)
             {
                 carrier.Render(g);

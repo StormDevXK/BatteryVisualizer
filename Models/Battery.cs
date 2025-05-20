@@ -22,10 +22,19 @@ namespace BatteryVisualizer.Models
         public Electrode Cathode;
         public Electrode Anode;
 
+        public List<Point> WirePath;
+
         public Battery()
         {
             Cathode = new Electrode(ElectrodeType.Cathode, X + 24, Y, Color.FromArgb(126, 126, 126));
             Anode = new Electrode(ElectrodeType.Anode, X + 291, Y, Color.FromArgb(200, 200, 200));
+            WirePath = new List<Point>
+            {
+                new Point(X + 54, Y),
+                new Point(X + 54, Y - 69),
+                new Point(X + 325, Y - 69),
+                new Point(X + 324, Y)
+            };
         }
 
         public void Render(Graphics g)
@@ -37,16 +46,7 @@ namespace BatteryVisualizer.Models
                 g.FillRectangle(batteryBrush, X, Y, Width, Height);
                 g.DrawRectangle(borderPen, X, Y, Width, Height);
             }
-
-            // Левая часть (область электрода, серая)
-            using (SolidBrush electrodeBrush = new SolidBrush(electrodeFillColor))
-            {
-                //g.FillRectangle(electrodeBrush, X + 24, Y, 65, 205);
-            }
-
-            // Правая часть (область электрода, серая)
-            //g.FillRectangle(new SolidBrush(electrodeFillColor), X + 291, Y, 65, 205);
-
+            
             // Сепаратор (пунктирная вертикальная линия)
             using (Pen separatorPen = new Pen(separatorColor, 4))
             {
@@ -55,18 +55,18 @@ namespace BatteryVisualizer.Models
             }
 
             // Провода (горизонтальный и вертикальные)
-            using (Pen redPen = new Pen(WireColor, 3))
+            using (Pen wirePen = new Pen(WireColor, 3))
             {
-                // Левая вертикальная
-                g.DrawLine(redPen, X + 54, Y - 69, X + 54, Y);
-                // Правая вертикальная
-                g.DrawLine(redPen, X + 324, Y - 69, X + 324, Y);
-                // Горизонтальная сверху
-                g.DrawLine(redPen, X + 53, Y - 69, X + 325, Y - 69);
+                for (int i = 0; i < WirePath.Count - 1; i++)
+                {
+                    g.DrawLine(wirePen, WirePath[i], WirePath[i + 1]);
+                }
             }
 
             Cathode.Render(g);
             Anode.Render(g);
+            Cathode.RenderCarriers(g);
+            Anode.RenderCarriers(g);
         }
     }
 }
