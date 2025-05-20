@@ -12,13 +12,46 @@ namespace BatteryVisualizer.Models
         public CarrierType Type;
         public Color Color => (Type == CarrierType.Ion) ? Color.FromArgb(220, 0, 0) : Color.FromArgb(0, 0, 220);
         public PointF Position;
-        public float Speed = 2.0f;
+        public float Speed = 2f;
         public int Diameter = 15;
+        public PointF? Target { get; private set; } = null;
+        public bool IsMoving => Target.HasValue;
 
         public Carrier(CarrierType type, PointF position)
         {
             Type = type;
             Position = position;
+        }
+
+        public void SetTarget(PointF newTarget)
+        {
+            Target = newTarget;
+        }
+
+        public void Stop()
+        {
+            Target = null;
+        }
+
+        public void MoveTowardsTarget()
+        {
+            if (!Target.HasValue) return;
+
+            float dx = Target.Value.X - Position.X;
+            float dy = Target.Value.Y - Position.Y;
+            float distance = (float)Math.Sqrt(dx * dx + dy * dy);
+
+            if (distance <= Speed)
+            {
+                Position = Target.Value;
+                Stop();
+            }
+            else
+            {
+                float stepX = Speed * dx / distance;
+                float stepY = Speed * dy / distance;
+                Position = new PointF(Position.X + stepX, Position.Y + stepY);
+            }
         }
 
         public void Render(Graphics g)
@@ -28,5 +61,6 @@ namespace BatteryVisualizer.Models
                 g.FillEllipse(brush, Position.X - Diameter / 2, Position.Y - Diameter / 2, Diameter, Diameter);
             }
         }
+
     }
 }

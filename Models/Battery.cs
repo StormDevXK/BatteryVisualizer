@@ -22,6 +22,12 @@ namespace BatteryVisualizer.Models
         public Electrode Cathode;
         public Electrode Anode;
 
+        public Battery()
+        {
+            Cathode = new Electrode(ElectrodeType.Cathode, X + 24, Y, Color.FromArgb(126, 126, 126));
+            Anode = new Electrode(ElectrodeType.Anode, X + 291, Y, Color.FromArgb(200, 200, 200));
+        }
+
         public void Render(Graphics g)
         {
             // Основная рамка аккумулятора
@@ -59,9 +65,7 @@ namespace BatteryVisualizer.Models
                 g.DrawLine(redPen, X + 53, Y - 69, X + 325, Y - 69);
             }
 
-            Cathode = new Electrode(ElectrodeType.Cathode, X + 24, Y, Color.FromArgb(126, 126, 126));
             Cathode.Render(g);
-            Anode = new Electrode(ElectrodeType.Anode, X + 291, Y, Color.FromArgb(200, 200, 200));
             Anode.Render(g);
         }
     }

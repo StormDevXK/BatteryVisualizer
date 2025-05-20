@@ -30,12 +30,10 @@ namespace BatteryVisualizer
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             numericUpDownCapacity = new NumericUpDown();
             labelCapacity = new Label();
             comboBatteryType = new ComboBox();
             labelBatteryType = new Label();
-            timer1 = new System.Windows.Forms.Timer(components);
             buttonStartAnimation = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapacity).BeginInit();
             SuspendLayout();
@@ -68,7 +66,6 @@ namespace BatteryVisualizer
             comboBatteryType.Name = "comboBatteryType";
             comboBatteryType.Size = new Size(180, 28);
             comboBatteryType.TabIndex = 3;
-            comboBatteryType.SelectedIndex = 0;
             // 
             // labelBatteryType
             // 
@@ -111,7 +108,6 @@ namespace BatteryVisualizer
         private Label labelCapacity;
         private ComboBox comboBatteryType;
         private Label labelBatteryType;
-        private System.Windows.Forms.Timer timer1;
         private Button buttonStartAnimation;
     }
 }

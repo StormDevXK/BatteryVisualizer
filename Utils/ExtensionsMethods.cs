@@ -15,5 +15,11 @@ namespace BatteryVisualizer.Utils
             var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
             return attribute?.Description ?? value.ToString();
         }
+
+        public static void DoubleBuffered(this Control control, bool enable)
+        {
+            typeof(Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                ?.SetValue(control, enable, null);
+        }
     }
 }

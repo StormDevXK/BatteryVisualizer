@@ -29,8 +29,6 @@ namespace BatteryVisualizer.Models
             X = x;
             Y = y;
             FillColor = color;
-
-            GenerateCarriers(5);
         }
 
         public void Render(Graphics g)
