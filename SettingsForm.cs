@@ -1,4 +1,5 @@
 using BatteryVisualizer.Models;
+using BatteryVisualizer.Utils;
 
 namespace BatteryVisualizer
 {

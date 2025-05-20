@@ -1,4 +1,4 @@
-﻿using BatteryVisualizer.Models;
+﻿using BatteryVisualizer.Utils;
 
 namespace BatteryVisualizer
 {
@@ -68,6 +68,7 @@ namespace BatteryVisualizer
             comboBatteryType.Name = "comboBatteryType";
             comboBatteryType.Size = new Size(180, 28);
             comboBatteryType.TabIndex = 3;
+            comboBatteryType.SelectedIndex = 0;
             // 
             // labelBatteryType
             // 
