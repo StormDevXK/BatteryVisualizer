@@ -24,7 +24,19 @@ namespace BatteryVisualizer.Models
 
         public List<Point> WirePath;
 
-        public Battery()
+        public bool IsCharging = false;
+        private int _currentCharge = 100; // Уровень заряда от 0 до 100
+        public int CurrentCharge
+        {
+            get => _currentCharge;
+            set => _currentCharge = Math.Clamp(value, 0, 100);
+        }
+        public double Voltage;
+        public double Resistance;
+        public double Current => Resistance != 0 ? (double)Decimal.Round((decimal)(Voltage / Resistance), 2)   : 0;
+        public int Capacity = 1000;
+
+        public Battery(double newVoltage, int newResistance)
         {
             Cathode = new Electrode(ElectrodeType.Cathode, X + 24, Y, Color.FromArgb(126, 126, 126));
             Anode = new Electrode(ElectrodeType.Anode, X + 291, Y, Color.FromArgb(200, 200, 200));
@@ -35,6 +47,8 @@ namespace BatteryVisualizer.Models
                 new Point(X + 325, Y - 69),
                 new Point(X + 324, Y)
             };
+            Voltage = newVoltage;
+            Resistance = newResistance;
         }
 
         public void Render(Graphics g)

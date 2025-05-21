@@ -54,7 +54,7 @@
             groupBoxStatus.Controls.Add(labelVoltageValue);
             groupBoxStatus.Controls.Add(labelResistanceValue);
             groupBoxStatus.Controls.Add(labelChargeLevel);
-            groupBoxStatus.Location = new Point(12, 269);
+            groupBoxStatus.Location = new Point(12, 50);
             groupBoxStatus.Name = "groupBoxStatus";
             groupBoxStatus.Size = new Size(202, 125);
             groupBoxStatus.TabIndex = 8;
@@ -110,7 +110,7 @@
             groupBoxPanel.Controls.Add(buttonReset);
             groupBoxPanel.Controls.Add(buttonDischarge);
             groupBoxPanel.Controls.Add(buttonCharge);
-            groupBoxPanel.Location = new Point(12, 152);
+            groupBoxPanel.Location = new Point(12, 283);
             groupBoxPanel.Name = "groupBoxPanel";
             groupBoxPanel.Size = new Size(202, 111);
             groupBoxPanel.TabIndex = 7;
@@ -123,9 +123,10 @@
             buttonReset.Location = new Point(6, 71);
             buttonReset.Name = "buttonReset";
             buttonReset.Size = new Size(190, 30);
-            buttonReset.TabIndex = 2;
+            buttonReset.TabIndex = 4;
             buttonReset.Text = "Сброс";
             buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += buttonReset_Click;
             // 
             // buttonDischarge
             // 
@@ -133,7 +134,7 @@
             buttonDischarge.Location = new Point(104, 35);
             buttonDischarge.Name = "buttonDischarge";
             buttonDischarge.Size = new Size(92, 30);
-            buttonDischarge.TabIndex = 1;
+            buttonDischarge.TabIndex = 3;
             buttonDischarge.Text = "Разрядить";
             buttonDischarge.UseVisualStyleBackColor = true;
             // 
@@ -143,7 +144,7 @@
             buttonCharge.Location = new Point(6, 35);
             buttonCharge.Name = "buttonCharge";
             buttonCharge.Size = new Size(92, 30);
-            buttonCharge.TabIndex = 0;
+            buttonCharge.TabIndex = 2;
             buttonCharge.Text = "Зарядить";
             buttonCharge.UseVisualStyleBackColor = true;
             // 
@@ -159,7 +160,7 @@
             buttonReturnToMenu.Location = new Point(12, 12);
             buttonReturnToMenu.Name = "buttonReturnToMenu";
             buttonReturnToMenu.Size = new Size(202, 32);
-            buttonReturnToMenu.TabIndex = 9;
+            buttonReturnToMenu.TabIndex = 0;
             buttonReturnToMenu.Text = "Назад";
             buttonReturnToMenu.UseVisualStyleBackColor = true;
             buttonReturnToMenu.Click += buttonReturnToMenu_Click;
@@ -168,7 +169,7 @@
             // 
             groupBoxBatterySettings.Controls.Add(trackBarResistance);
             groupBoxBatterySettings.Controls.Add(labelResistanceTitle);
-            groupBoxBatterySettings.Location = new Point(12, 50);
+            groupBoxBatterySettings.Location = new Point(12, 181);
             groupBoxBatterySettings.Name = "groupBoxBatterySettings";
             groupBoxBatterySettings.Size = new Size(202, 96);
             groupBoxBatterySettings.TabIndex = 8;
@@ -178,14 +179,16 @@
             // trackBarResistance
             // 
             trackBarResistance.AutoSize = false;
+            trackBarResistance.LargeChange = 10;
             trackBarResistance.Location = new Point(6, 46);
-            trackBarResistance.Maximum = 100;
+            trackBarResistance.Maximum = 1000;
             trackBarResistance.Minimum = 1;
             trackBarResistance.Name = "trackBarResistance";
             trackBarResistance.Size = new Size(190, 40);
             trackBarResistance.TabIndex = 1;
             trackBarResistance.TickFrequency = 10;
-            trackBarResistance.Value = 10;
+            trackBarResistance.Value = 50;
+            trackBarResistance.Scroll += trackBarResistance_Scroll;
             // 
             // labelResistanceTitle
             // 

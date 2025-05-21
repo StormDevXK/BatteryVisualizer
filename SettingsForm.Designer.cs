@@ -61,7 +61,9 @@ namespace BatteryVisualizer
             // 
             comboBatteryType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBatteryType.FormattingEnabled = true;
-            comboBatteryType.Items.AddRange(new object[] { BatteryType.LiIon, BatteryType.NiMH, BatteryType.NiCd, BatteryType.LeadAcid });
+            comboBatteryType.DataSource = BatteryType.All.ToList();
+            comboBatteryType.DisplayMember = "Text";  // чтобы показать читаемый текст
+            //comboBatteryType.Items.AddRange(new object[] { BatteryType.LiIon, BatteryType.NiMH, BatteryType.NiCd, BatteryType.LeadAcid });
             comboBatteryType.Location = new Point(129, 15);
             comboBatteryType.Name = "comboBatteryType";
             comboBatteryType.Size = new Size(180, 28);

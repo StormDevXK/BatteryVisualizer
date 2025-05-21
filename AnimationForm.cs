@@ -21,15 +21,35 @@ namespace BatteryVisualizer
         private SettingsForm _parentForm;
         private Battery _battery;
         private System.Windows.Forms.Timer _animationTimer;
-        public AnimationForm(SettingsForm parentForm)
+        private BatteryType _selectedBatteryType;
+        private int _selectedCapacity;
+        public AnimationForm(SettingsForm parentForm, BatteryType selectedBatteryType, int selectedCapacity)
+        //public AnimationForm(SettingsForm parentForm)
         {
             InitializeComponent();
             _parentForm = parentForm;
+            _selectedBatteryType = selectedBatteryType;
+            _selectedCapacity = selectedCapacity;
             panelAnimation.Paint += PanelAnimation_Paint;
-            panelAnimation.DoubleBuffered(true); // Включаем двойную буферизацию
-            _battery = new Battery();
-            _battery.Cathode.GenerateCarriers(20);
-            _battery.Anode.GenerateCarriers(20);
+            panelAnimation.DoubleBuffered(true);
+            StartBatteryAnimation();
+
+
+            // Таймер анимации
+            _animationTimer = new System.Windows.Forms.Timer();
+            _animationTimer.Interval = 16; // 60 FPS
+            _animationTimer.Tick += AnimationTimer_Tick;
+            _animationTimer.Start();
+            _selectedCapacity = selectedCapacity;
+        }
+
+        private void StartBatteryAnimation()
+        {
+            _battery = new Battery(_selectedBatteryType.Voltage, trackBarResistance.Value);
+            _battery.Capacity = _selectedCapacity;
+            _battery.Cathode.GenerateCarriers(_battery.Capacity / 100);
+            _battery.Anode.GenerateCarriers(_battery.Capacity / 100);
+            _battery.Resistance = (double)trackBarResistance.Value / 10;
 
 
             foreach (var carrier in _battery.Cathode.Carriers)
@@ -45,13 +65,6 @@ namespace BatteryVisualizer
                 carrier.SetTarget(_battery.WirePath[lastIndex]);
             }
 
-
-
-            // Таймер анимации
-            _animationTimer = new System.Windows.Forms.Timer();
-            _animationTimer.Interval = 16; // 60 FPS
-            _animationTimer.Tick += AnimationTimer_Tick;
-            _animationTimer.Start();
         }
 
         private void PanelAnimation_Paint(object sender, PaintEventArgs e)
@@ -99,8 +112,6 @@ namespace BatteryVisualizer
             }
         }
 
-
-
         private void AnimationTimer_Tick(object sender, EventArgs e)
         {
             MoveCarriersAlongWire();
@@ -110,6 +121,11 @@ namespace BatteryVisualizer
             foreach (var carrier in _battery.Anode.Carriers)
                 carrier.MoveTowardsTarget();
 
+            labelChargeLevel.Text = $"Уровень заряда: {_battery.CurrentCharge}%";
+            labelCurrentValue.Text = $"Сила тока: {_battery.Current} А";
+            labelResistanceValue.Text = $"Сопротивление: {_battery.Resistance} Ом";
+            labelVoltageValue.Text = $"Напряжение: {_battery.Voltage} В";
+
             panelAnimation.Invalidate(); // Перерисовка панели
         }
 
@@ -118,6 +134,16 @@ namespace BatteryVisualizer
             _animationTimer.Stop();
             _parentForm.Show();
             this.Close();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            StartBatteryAnimation();
+        }
+
+        private void trackBarResistance_Scroll(object sender, EventArgs e)
+        {
+            _battery.Resistance = (double)trackBarResistance.Value / 10;
         }
     }
 }
