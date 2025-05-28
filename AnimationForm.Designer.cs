@@ -137,6 +137,7 @@
             buttonDischarge.TabIndex = 3;
             buttonDischarge.Text = "Разрядить";
             buttonDischarge.UseVisualStyleBackColor = true;
+            buttonDischarge.Click += buttonDischarge_Click;
             // 
             // buttonCharge
             // 
@@ -147,6 +148,7 @@
             buttonCharge.TabIndex = 2;
             buttonCharge.Text = "Зарядить";
             buttonCharge.UseVisualStyleBackColor = true;
+            buttonCharge.Click += buttonCharge_Click;
             // 
             // panelAnimation
             // 

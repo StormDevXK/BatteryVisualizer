@@ -15,9 +15,9 @@ namespace BatteryVisualizer.Models
         public float Speed = 2f; 
         public int CurrentWireIndex = 0;
         public int Diameter = 10;
+        //public DateTime? ActivationTime = null;
         public PointF? Target { get; private set; } = null;
         public bool IsMoving => Target.HasValue;
-
         public Carrier(CarrierType type, PointF position)
         {
             Type = type;
