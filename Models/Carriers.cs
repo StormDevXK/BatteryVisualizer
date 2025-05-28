@@ -12,10 +12,10 @@ namespace BatteryVisualizer.Models
         public CarrierType Type;
         public Color Color => (Type == CarrierType.Ion) ? Color.FromArgb(220, 0, 0) : Color.FromArgb(0, 0, 220);
         public PointF Position;
-        public float Speed = 2f; 
+        public float Speed = 2f;
         public int CurrentWireIndex = 0;
         public int Diameter = 10;
-        //public DateTime? ActivationTime = null;
+        public DateTime? ActivationTime = null;
         public PointF? Target { get; private set; } = null;
         public bool IsMoving => Target.HasValue;
         public Carrier(CarrierType type, PointF position)
@@ -36,6 +36,7 @@ namespace BatteryVisualizer.Models
 
         public void MoveTowardsTarget()
         {
+            if (ActivationTime != null && DateTime.Now < ActivationTime.Value) return;
             if (!Target.HasValue) return;
 
             float dx = Target.Value.X - Position.X;

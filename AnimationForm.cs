@@ -23,6 +23,9 @@ namespace BatteryVisualizer
         private System.Windows.Forms.Timer _animationTimer;
         private BatteryType _selectedBatteryType;
         private int _selectedCapacity;
+        private int _electronCounter;
+        private readonly Random _rand = new Random();
+        private readonly int _startMoveDelay = 500;
         public AnimationForm(SettingsForm parentForm, BatteryType selectedBatteryType, int selectedCapacity)
         //public AnimationForm(SettingsForm parentForm)
         {
@@ -50,27 +53,30 @@ namespace BatteryVisualizer
             _battery.Cathode.GenerateCarriers(_battery.Capacity / 100);
             _battery.Anode.GenerateCarriers(_battery.Capacity / 100);
             _battery.Resistance = (double)trackBarResistance.Value / 10;
+            _electronCounter = _battery.Anode.Carriers.Count;
 
-
+            float carrierSpeed = ExtensionsMethods.SpeedMath(trackBarResistance);
             foreach (var carrier in _battery.Cathode.Carriers)
-            {
-                float offsetX = _battery.Anode.X - _battery.Cathode.X;
-                PointF anodePosition = new PointF(carrier.Position.X + offsetX, carrier.Position.Y);
-                carrier.SetTarget(anodePosition);
-            }
+                carrier.Speed = carrierSpeed;
             foreach (var carrier in _battery.Anode.Carriers)
+                carrier.Speed = carrierSpeed;
+
+            DateTime baseTime = DateTime.Now;
+            for (int i = 0; i < _battery.Cathode.Carriers.Count; i++)
             {
-                if (_battery.IsCharging)
-                {
-                    carrier.SetTarget(_battery.WirePath[0]);
-                }
-                else
-                {
-                    int lastIndex = _battery.WirePath.Count - 1;
-                    carrier.SetTarget(_battery.WirePath[lastIndex]);
-                }
+                var carrier = _battery.Cathode.Carriers[i];
+                float offsetX = carrier.Position.X - _battery.Anode.X + (float)_rand.NextDouble() * _battery.Anode.Width;
+                carrier.SetTarget(new PointF(carrier.Position.X + _battery.Anode.Width - offsetX, carrier.Position.Y));
+                carrier.ActivationTime = baseTime.AddMilliseconds(i * _startMoveDelay);
             }
 
+            for (int i = 0; i < _battery.Anode.Carriers.Count; i++)
+            {
+                var carrier = _battery.Anode.Carriers[i];
+                carrier.ActivationTime = baseTime.AddMilliseconds(i * _startMoveDelay);
+                carrier.CurrentWireIndex = 0;
+                carrier.Stop();
+            }
         }
 
         private void PanelAnimation_Paint(object sender, PaintEventArgs e)
@@ -80,10 +86,9 @@ namespace BatteryVisualizer
             _battery.Render(g);
         }
 
-        private void MoveCarriersAlongWire()
+        private void MoveCarriersAlongWire(DateTime baseTime)
         {
             var wirePath = _battery.WirePath.ToList();
-            Random rand = new Random();
             Electrode targetElectrode = _battery.Anode;
             if (!_battery.IsCharging)
             {
@@ -91,23 +96,26 @@ namespace BatteryVisualizer
                 targetElectrode = _battery.Cathode;
             }
 
-            foreach (var carrier in _battery.Anode.Carriers.ToList())
+            for (int i = 0; i < _battery.Anode.Carriers.Count; i++)
             {
+                var carrier = _battery.Anode.Carriers[i];
                 if (!carrier.IsMoving)
                 {
+                    if (carrier.ActivationTime.HasValue && baseTime < carrier.ActivationTime.Value) continue;
                     if (carrier.CurrentWireIndex < wirePath.Count)
                     {
                         carrier.SetTarget(wirePath[carrier.CurrentWireIndex]);
                     }
-                    //else
                     else if (carrier.CurrentWireIndex == wirePath.Count)
                     {
-                        // Электрон прошёл весь путь по проводу
-                        float relativeX = (float)rand.NextDouble() * targetElectrode.Width;
-                        float relativeY = (float)rand.NextDouble() * targetElectrode.Height;
+                        float relativeX = (float)_rand.NextDouble() * targetElectrode.Width;
+                        float relativeY = (float)_rand.NextDouble() * targetElectrode.Height;
 
                         PointF finalPosition = new PointF(targetElectrode.X + relativeX, targetElectrode.Y + relativeY);
                         carrier.SetTarget(finalPosition);
+                        carrier.CurrentWireIndex++;
+                        if (_battery.IsCharging) _electronCounter++;
+                        else _electronCounter--;
                         continue;
                     }
                 }
@@ -125,36 +133,39 @@ namespace BatteryVisualizer
         {
             int wireLength = _battery.WirePath.Count;
 
-            foreach (var carrier in _battery.Anode.Carriers)
+            DateTime baseTime = DateTime.Now;
+
+            for (int i = 0; i < _battery.Anode.Carriers.Count; i++)
             {
-                // Если электрон уже прошёл весь путь (например, в фазе перехода в электрод), просто пересоздаем его путь
-                if (carrier.CurrentWireIndex > wireLength)
+                var carrier = _battery.Anode.Carriers[i];
+                carrier.ActivationTime = baseTime.AddMilliseconds(i * _startMoveDelay); if (carrier.CurrentWireIndex > wireLength)
                 {
                     carrier.CurrentWireIndex = 0;
                     continue;
                 }
 
-                // Инвертируем индекс: движение в обратную сторону
                 carrier.CurrentWireIndex = wireLength - carrier.CurrentWireIndex;
-                carrier.Stop(); // Принудительно останавливаем, чтобы начать движение к новому target'у
+                carrier.Stop();
             }
         }
 
         private void AnimationTimer_Tick(object sender, EventArgs e)
         {
-            MoveCarriersAlongWire();
+            MoveCarriersAlongWire(DateTime.Now);
             foreach (var carrier in _battery.Cathode.Carriers)
                 carrier.MoveTowardsTarget();
 
             foreach (var carrier in _battery.Anode.Carriers)
                 carrier.MoveTowardsTarget();
 
+            _battery.CurrentCharge = (int)((float)_electronCounter / (float)_battery.Anode.Carriers.Count * 100);// доделать стабильный механизм при ручной разрядке зарядке
+            //_battery.CurrentCharge = _electronCounter;
             labelChargeLevel.Text = $"Уровень заряда: {_battery.CurrentCharge}%";
             labelCurrentValue.Text = $"Сила тока: {_battery.Current} А";
             labelResistanceValue.Text = $"Сопротивление: {_battery.Resistance} Ом";
             labelVoltageValue.Text = $"Напряжение: {_battery.Voltage} В";
 
-            panelAnimation.Invalidate(); // Перерисовка панели
+            panelAnimation.Invalidate();
         }
 
         private void buttonReturnToMenu_Click(object sender, EventArgs e)
@@ -172,18 +183,26 @@ namespace BatteryVisualizer
         private void trackBarResistance_Scroll(object sender, EventArgs e)
         {
             _battery.Resistance = (double)trackBarResistance.Value / 10;
+            float carrierSpeed = ExtensionsMethods.SpeedMath(trackBarResistance);
+            foreach (var carrier in _battery.Cathode.Carriers)
+                carrier.Speed = carrierSpeed;
+            foreach (var carrier in _battery.Anode.Carriers)
+                carrier.Speed = carrierSpeed;
         }
 
         private void buttonCharge_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
             if (!_battery.IsCharging)
             {
-                foreach (var carrier in _battery.Cathode.Carriers)
+                DateTime baseTime = DateTime.Now;
+                for (int i = 0; i < _battery.Cathode.Carriers.Count; i++)
                 {
-                    float offsetX = carrier.Position.X - _battery.Cathode.X + (float)rand.NextDouble() * _battery.Cathode.Width;
+                    var carrier = _battery.Cathode.Carriers[i];
+                    float offsetX = carrier.Position.X - _battery.Cathode.X + (float)_rand.NextDouble() * _battery.Cathode.Width;
                     carrier.SetTarget(new PointF(carrier.Position.X + _battery.Cathode.Width - offsetX, carrier.Position.Y));
+                    carrier.ActivationTime = baseTime.AddMilliseconds(i * _startMoveDelay);
                 }
+
                 ChangeDirection();
                 _battery.IsCharging = true;
             }
@@ -191,17 +210,24 @@ namespace BatteryVisualizer
 
         private void buttonDischarge_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
             if (_battery.IsCharging)
             {
-                foreach (var carrier in _battery.Cathode.Carriers)
+                DateTime baseTime = DateTime.Now;
+                for (int i = 0; i < _battery.Cathode.Carriers.Count; i++)
                 {
-                    float offsetX = carrier.Position.X - _battery.Anode.X + (float)rand.NextDouble() * _battery.Anode.Width;
+                    var carrier = _battery.Cathode.Carriers[i];
+                    float offsetX = carrier.Position.X - _battery.Anode.X + (float)_rand.NextDouble() * _battery.Anode.Width;
                     carrier.SetTarget(new PointF(carrier.Position.X + _battery.Anode.Width - offsetX, carrier.Position.Y));
+                    carrier.ActivationTime = baseTime.AddMilliseconds(i * _startMoveDelay);
                 }
                 ChangeDirection();
                 _battery.IsCharging = false;
             }
+        }
+
+        private void AnimationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //_parentForm.Close();
         }
     }
 }

@@ -213,6 +213,7 @@
             Controls.Add(panelAnimation);
             Name = "AnimationForm";
             Text = "Эмулятор аккумулятора";
+            FormClosing += AnimationForm_FormClosing;
             groupBoxStatus.ResumeLayout(false);
             groupBoxStatus.PerformLayout();
             groupBoxPanel.ResumeLayout(false);

@@ -44,8 +44,9 @@ namespace BatteryVisualizer.Models
             {
                 new Point(X + 54, Y),
                 new Point(X + 54, Y - 69),
+                //new Point(X + 190, Y - 69),
                 new Point(X + 325, Y - 69),
-                new Point(X + 324, Y)
+                new Point(X + 325, Y)
             };
             Voltage = newVoltage;
             Resistance = newResistance;
