@@ -42,6 +42,7 @@
             groupBoxBatterySettings = new GroupBox();
             trackBarResistance = new TrackBar();
             labelResistanceTitle = new Label();
+            labelBatteryStatus = new Label();
             groupBoxStatus.SuspendLayout();
             groupBoxPanel.SuspendLayout();
             groupBoxBatterySettings.SuspendLayout();
@@ -50,6 +51,7 @@
             // 
             // groupBoxStatus
             // 
+            groupBoxStatus.Controls.Add(labelBatteryStatus);
             groupBoxStatus.Controls.Add(labelCurrentValue);
             groupBoxStatus.Controls.Add(labelVoltageValue);
             groupBoxStatus.Controls.Add(labelResistanceValue);
@@ -65,7 +67,7 @@
             // 
             labelCurrentValue.AutoSize = true;
             labelCurrentValue.ImeMode = ImeMode.NoControl;
-            labelCurrentValue.Location = new Point(6, 83);
+            labelCurrentValue.Location = new Point(6, 103);
             labelCurrentValue.MaximumSize = new Size(190, 0);
             labelCurrentValue.Name = "labelCurrentValue";
             labelCurrentValue.Size = new Size(106, 20);
@@ -76,7 +78,7 @@
             // 
             labelVoltageValue.AutoSize = true;
             labelVoltageValue.ImeMode = ImeMode.NoControl;
-            labelVoltageValue.Location = new Point(6, 63);
+            labelVoltageValue.Location = new Point(6, 83);
             labelVoltageValue.MaximumSize = new Size(190, 0);
             labelVoltageValue.Name = "labelVoltageValue";
             labelVoltageValue.Size = new Size(127, 20);
@@ -87,7 +89,7 @@
             // 
             labelResistanceValue.AutoSize = true;
             labelResistanceValue.ImeMode = ImeMode.NoControl;
-            labelResistanceValue.Location = new Point(6, 43);
+            labelResistanceValue.Location = new Point(6, 63);
             labelResistanceValue.MaximumSize = new Size(190, 0);
             labelResistanceValue.Name = "labelResistanceValue";
             labelResistanceValue.Size = new Size(160, 20);
@@ -98,7 +100,7 @@
             // 
             labelChargeLevel.AutoSize = true;
             labelChargeLevel.ImeMode = ImeMode.NoControl;
-            labelChargeLevel.Location = new Point(6, 23);
+            labelChargeLevel.Location = new Point(6, 43);
             labelChargeLevel.MaximumSize = new Size(190, 0);
             labelChargeLevel.Name = "labelChargeLevel";
             labelChargeLevel.Size = new Size(148, 20);
@@ -201,11 +203,23 @@
             labelResistanceTitle.TabIndex = 0;
             labelResistanceTitle.Text = "Сопротивление (Ом)";
             // 
+            // labelBatteryStatus
+            // 
+            labelBatteryStatus.AutoSize = true;
+            labelBatteryStatus.ImeMode = ImeMode.NoControl;
+            labelBatteryStatus.Location = new Point(6, 23);
+            labelBatteryStatus.MaximumSize = new Size(190, 0);
+            labelBatteryStatus.Name = "labelBatteryStatus";
+            labelBatteryStatus.Size = new Size(72, 20);
+            labelBatteryStatus.TabIndex = 4;
+            labelBatteryStatus.Text = "Разрядка";
+            // 
             // AnimationForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(738, 527);
+            ControlBox = false;
             Controls.Add(groupBoxBatterySettings);
             Controls.Add(buttonReturnToMenu);
             Controls.Add(groupBoxStatus);
@@ -239,5 +253,6 @@
         private Label labelCurrentValue;
         private Label labelVoltageValue;
         private Label labelResistanceValue;
+        private Label labelBatteryStatus;
     }
 }

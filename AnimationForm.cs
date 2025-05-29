@@ -160,6 +160,7 @@ namespace BatteryVisualizer
 
             _battery.CurrentCharge = (int)((float)_electronCounter / (float)_battery.Anode.Carriers.Count * 100);// доделать стабильный механизм при ручной разрядке зарядке
             //_battery.CurrentCharge = _electronCounter;
+            labelBatteryStatus.Text = _battery.IsCharging ? "Зарядка" : "Разрядка"; 
             labelChargeLevel.Text = $"Уровень заряда: {_battery.CurrentCharge}%";
             labelCurrentValue.Text = $"Сила тока: {_battery.Current} А";
             labelResistanceValue.Text = $"Сопротивление: {_battery.Resistance} Ом";

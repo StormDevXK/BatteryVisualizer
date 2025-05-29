@@ -8,6 +8,8 @@ namespace BatteryVisualizer
         public SettingsForm()
         {
             InitializeComponent();
+            comboBatteryType.DataSource = BatteryType.All.ToList();
+            comboBatteryType.SelectedIndex = 0;
         }
 
         public void buttonStartAnimation_Click(object sender, EventArgs e)

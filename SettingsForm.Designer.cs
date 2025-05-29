@@ -35,12 +35,14 @@ namespace BatteryVisualizer
             comboBatteryType = new ComboBox();
             labelBatteryType = new Label();
             buttonStartAnimation = new Button();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapacity).BeginInit();
             SuspendLayout();
             // 
             // numericUpDownCapacity
             // 
-            numericUpDownCapacity.Location = new Point(129, 48);
+            numericUpDownCapacity.Location = new Point(150, 186);
             numericUpDownCapacity.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDownCapacity.Minimum = new decimal(new int[] { 100, 0, 0, 0 });
             numericUpDownCapacity.Name = "numericUpDownCapacity";
@@ -51,7 +53,7 @@ namespace BatteryVisualizer
             // labelCapacity
             // 
             labelCapacity.AutoSize = true;
-            labelCapacity.Location = new Point(12, 50);
+            labelCapacity.Location = new Point(33, 188);
             labelCapacity.Name = "labelCapacity";
             labelCapacity.Size = new Size(111, 20);
             labelCapacity.TabIndex = 4;
@@ -59,12 +61,10 @@ namespace BatteryVisualizer
             // 
             // comboBatteryType
             // 
+            comboBatteryType.DisplayMember = "Text";
             comboBatteryType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBatteryType.FormattingEnabled = true;
-            comboBatteryType.DataSource = BatteryType.All.ToList();
-            comboBatteryType.DisplayMember = "Text";  // чтобы показать читаемый текст
-            //comboBatteryType.Items.AddRange(new object[] { BatteryType.LiIon, BatteryType.NiMH, BatteryType.NiCd, BatteryType.LeadAcid });
-            comboBatteryType.Location = new Point(129, 15);
+            comboBatteryType.Location = new Point(150, 153);
             comboBatteryType.Name = "comboBatteryType";
             comboBatteryType.Size = new Size(180, 28);
             comboBatteryType.TabIndex = 3;
@@ -72,7 +72,7 @@ namespace BatteryVisualizer
             // labelBatteryType
             // 
             labelBatteryType.AutoSize = true;
-            labelBatteryType.Location = new Point(12, 15);
+            labelBatteryType.Location = new Point(33, 153);
             labelBatteryType.Name = "labelBatteryType";
             labelBatteryType.Size = new Size(99, 20);
             labelBatteryType.TabIndex = 1;
@@ -80,7 +80,7 @@ namespace BatteryVisualizer
             // 
             // buttonStartAnimation
             // 
-            buttonStartAnimation.Location = new Point(12, 96);
+            buttonStartAnimation.Location = new Point(33, 234);
             buttonStartAnimation.Name = "buttonStartAnimation";
             buttonStartAnimation.Size = new Size(296, 30);
             buttonStartAnimation.TabIndex = 0;
@@ -88,11 +88,32 @@ namespace BatteryVisualizer
             buttonStartAnimation.UseVisualStyleBackColor = true;
             buttonStartAnimation.Click += buttonStartAnimation_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(342, 28);
+            label1.TabIndex = 5;
+            label1.Text = "Симулятор Работы Аккумулятора";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 55);
+            label2.Name = "label2";
+            label2.Size = new Size(223, 80);
+            label2.TabIndex = 6;
+            label2.Text = "Для начала симуляции:\r\n1. Выберите тип аккумулятора.\r\n2. Укажите его ёмкость.\r\n3. Нажмите \"Старт\".";
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(320, 138);
+            ClientSize = new Size(368, 280);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(buttonStartAnimation);
             Controls.Add(labelBatteryType);
             Controls.Add(numericUpDownCapacity);
@@ -111,5 +132,7 @@ namespace BatteryVisualizer
         private ComboBox comboBatteryType;
         private Label labelBatteryType;
         private Button buttonStartAnimation;
+        private Label label1;
+        private Label label2;
     }
 }

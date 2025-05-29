@@ -62,6 +62,17 @@ namespace BatteryVisualizer.Models
             {
                 g.FillEllipse(brush, Position.X - Diameter / 2, Position.Y - Diameter / 2, Diameter, Diameter);
             }
+            string symbolToDraw = (Type == CarrierType.Ion) ? "+" : "-";
+            Color symbolColor = Color.White;
+
+            float fontSize = Math.Max(1f, Diameter * 0.8f);
+
+            using (Font symbolFont = new Font("Arial", fontSize, FontStyle.Bold))
+            using (SolidBrush symbolBrush = new SolidBrush(symbolColor))
+            using (StringFormat stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+            {
+                g.DrawString(symbolToDraw, symbolFont, symbolBrush, Position.X, Position.Y, stringFormat);
+            }
         }
 
     }
