@@ -42,18 +42,18 @@ namespace BatteryVisualizer
             // 
             // numericUpDownCapacity
             // 
-            numericUpDownCapacity.Location = new Point(150, 186);
+            numericUpDownCapacity.Location = new Point(133, 184);
             numericUpDownCapacity.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDownCapacity.Minimum = new decimal(new int[] { 100, 0, 0, 0 });
             numericUpDownCapacity.Name = "numericUpDownCapacity";
-            numericUpDownCapacity.Size = new Size(180, 27);
+            numericUpDownCapacity.Size = new Size(236, 27);
             numericUpDownCapacity.TabIndex = 2;
             numericUpDownCapacity.Value = new decimal(new int[] { 1000, 0, 0, 0 });
             // 
             // labelCapacity
             // 
             labelCapacity.AutoSize = true;
-            labelCapacity.Location = new Point(33, 188);
+            labelCapacity.Location = new Point(16, 186);
             labelCapacity.Name = "labelCapacity";
             labelCapacity.Size = new Size(111, 20);
             labelCapacity.TabIndex = 4;
@@ -64,15 +64,15 @@ namespace BatteryVisualizer
             comboBatteryType.DisplayMember = "Text";
             comboBatteryType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBatteryType.FormattingEnabled = true;
-            comboBatteryType.Location = new Point(150, 153);
+            comboBatteryType.Location = new Point(133, 151);
             comboBatteryType.Name = "comboBatteryType";
-            comboBatteryType.Size = new Size(180, 28);
+            comboBatteryType.Size = new Size(236, 28);
             comboBatteryType.TabIndex = 3;
             // 
             // labelBatteryType
             // 
             labelBatteryType.AutoSize = true;
-            labelBatteryType.Location = new Point(33, 153);
+            labelBatteryType.Location = new Point(16, 151);
             labelBatteryType.Name = "labelBatteryType";
             labelBatteryType.Size = new Size(99, 20);
             labelBatteryType.TabIndex = 1;
@@ -80,9 +80,9 @@ namespace BatteryVisualizer
             // 
             // buttonStartAnimation
             // 
-            buttonStartAnimation.Location = new Point(33, 234);
+            buttonStartAnimation.Location = new Point(16, 232);
             buttonStartAnimation.Name = "buttonStartAnimation";
-            buttonStartAnimation.Size = new Size(296, 30);
+            buttonStartAnimation.Size = new Size(353, 30);
             buttonStartAnimation.TabIndex = 0;
             buttonStartAnimation.Text = "Старт";
             buttonStartAnimation.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@ namespace BatteryVisualizer
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(16, 9);
             label1.Name = "label1";
             label1.Size = new Size(342, 28);
             label1.TabIndex = 5;
@@ -111,7 +111,7 @@ namespace BatteryVisualizer
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(368, 280);
+            ClientSize = new Size(389, 280);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(buttonStartAnimation);
